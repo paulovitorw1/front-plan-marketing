@@ -1,8 +1,6 @@
 import { Product, ProductBrand } from "@/Interfaces/ListProduct/ProductInterface";
 import { ResponseData } from "@/Interfaces/ResponseAPIInterface";
 import { api } from "../config";
-import { SendProductAPI } from "@/model/ProductAPI";
-
 export class ListProductRest {
     getProductsBrands(): Promise<ResponseData<ProductBrand[]>> {
         const url = "brand"
@@ -19,13 +17,13 @@ export class ListProductRest {
         return api.get(url).then(response => response.data);
     }
 
-    createProduct(product: SendProductAPI): Promise<Product> {
+    createProduct(product: FormData): Promise<Product> {
         const url = "product"
         return api.post(url, product).then(response => response.data);
     }
 
-    updateProduct(product: SendProductAPI): Promise<Product> {
-        const url = `product/${product.id}`
+    updateProduct(product: FormData, id: string): Promise<Product> {
+        const url = `product/${id}`
         return api.patch(url, product).then(response => response.data);
     }
     deleteProductsById(id: string): Promise<ResponseData<void>> {

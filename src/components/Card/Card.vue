@@ -1,8 +1,8 @@
 <template>
   <div class="card shadow-sm mb-3 ds-card h-100">
-    <img :src="require('@/assets/geladeira.jpeg')" class="card-img-top img-fluid w-100" alt="..." />
+    <img :src="'http://127.0.0.1:8001/' + urlImage" class="card-img-top img-fluid w-100" alt="..." />
     <div class="card-body">
-      <h5 class="card-title">{{ title }}</h5>
+      <h5 class="card-title limited-text">{{ title }}</h5>
       <div class="text-limit text-truncate">
         <p class="card-text text-limit">
           {{ description }}

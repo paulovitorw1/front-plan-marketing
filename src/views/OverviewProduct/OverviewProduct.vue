@@ -5,7 +5,7 @@
   </p>
   <div class="row mb-4">
     <div class="col-12 col-md-8 pe-0 image-product">
-      <img :src="require('@/assets/geladeira.jpeg')" class="d-block w-100 img-fluid rounded-start border" alt="..." />
+      <img :src="'http://127.0.0.1:8001/' + product.imageProduct" class="d-block w-100 img-fluid rounded-start border" alt="..." />
     </div>
     <div class="col-12 col-md-4 ps-0 d-flex align-items-stretch" id="card-value">
       <div class="card card-value w-100 border-start-0 rounded-start-0">
