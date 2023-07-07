@@ -1,0 +1,30 @@
+@import "../../assets/sass/app.scss";
+.limited-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  position: relative;
+}
+
+.limited-text::after {
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 5px;
+  background: white;
+}
+
+.ds-card {
+    cursor: pointer;
+    &:hover {
+        background-color: #dfe5eb;
+      }
+}
+
+.text-limit {
+  max-width: 200px;
+  max-height: 400px;
+  overflow: hidden;
+}
