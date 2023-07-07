@@ -1,6 +1,5 @@
 import { ListProductPresenterInterface, ListProductViewInterface } from "@/Interfaces/ListProduct/ListProductViewInterface";
 import { Product } from "@/Interfaces/ListProduct/ProductInterface";
-import { SendProductAPI } from "@/model/ProductAPI";
 import { ListProductRest } from "@/services/api/ListProductRest";
 
 export class ListProductPresenter implements ListProductPresenterInterface {
@@ -63,7 +62,7 @@ export class ListProductPresenter implements ListProductPresenterInterface {
     updateProduct(product: Product): void {
         if (!this.validationForm(product)) return;
         this._service
-            .updateProduct(this.sendProductAPI(product))
+            .updateProduct(this.sendProductAPI(product), product.id)
             .then(() => {
                 this.view.productActionSuccess("Produto atualizado com sucesso!")
             })
@@ -85,19 +84,21 @@ export class ListProductPresenter implements ListProductPresenterInterface {
             });
     }
 
-    sendProductAPI(product: Product): SendProductAPI {
-        return {
-            id: product.id,
-            name: product.name,
-            description: product.description,
-            voltage: product.voltage,
-            productBrand: product.productBrand.id,
-        };
+    sendProductAPI(product: Product): FormData {
+        const formData = new FormData();
+        // formData.append("imageProduct", product.imageProduct[0]);
+        formData.append('id', product.id);
+        formData.append('name', product.name);
+        formData.append('description', product.description);
+        formData.append('voltage', product.voltage);
+        formData.append('productBrand', product.productBrand.id);
+        formData.append('imageProduct', product.imageProduct);
+        return formData
     }
 
     validationForm(product: Product): boolean {
-        const { name, description, voltage, productBrand } = product;
-        if (!name || !description || !voltage || !productBrand) {
+        const { name, description, voltage, productBrand, imageProduct } = product;
+        if (!name || !description || !voltage || !productBrand || !imageProduct) {
             this.view.showError("Preencha todos os campos obrigatórios");
             return false;
         }

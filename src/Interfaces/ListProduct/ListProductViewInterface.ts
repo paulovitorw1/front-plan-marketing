@@ -1,4 +1,3 @@
-import { SendProductAPI } from "@/model/ProductAPI";
 import { Product, ProductBrand } from "./ProductInterface";
 
 export interface ListProductViewInterface {
@@ -24,6 +23,6 @@ export interface ListProductPresenterInterface {
     updateProduct(product: Product): void;
     deleteProduct(id: string): void;
     getProductBrands(): void
-    sendProductAPI(product: Product): SendProductAPI
+    sendProductAPI(product: Product): FormData
     validationForm(product: Product): void;
 }
