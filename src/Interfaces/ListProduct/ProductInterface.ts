@@ -5,6 +5,7 @@ export interface Product {
     voltage: string,
     productBrand: ProductBrand,
     imageProduct: string
+    imageProductURL: string
 }
 
 export interface ProductBrand {
