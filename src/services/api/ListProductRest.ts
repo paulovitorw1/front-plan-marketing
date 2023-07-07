@@ -24,7 +24,10 @@ export class ListProductRest {
 
     updateProduct(product: FormData, id: string): Promise<Product> {
         const url = `product/${id}`
-        return api.patch(url, product).then(response => response.data);
+        product.append('_method', 'put');
+        return api.post(url, product, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        }).then(response => response.data);
     }
     deleteProductsById(id: string): Promise<ResponseData<void>> {
         const url = `product/${id}`

@@ -60,7 +60,7 @@ export class ListProductPresenter implements ListProductPresenterInterface {
     }
 
     updateProduct(product: Product): void {
-        if (!this.validationForm(product)) return;
+        if (!this.validationForm(product, true)) return;
         this._service
             .updateProduct(this.sendProductAPI(product), product.id)
             .then(() => {
@@ -86,19 +86,19 @@ export class ListProductPresenter implements ListProductPresenterInterface {
 
     sendProductAPI(product: Product): FormData {
         const formData = new FormData();
-        // formData.append("imageProduct", product.imageProduct[0]);
         formData.append('id', product.id);
         formData.append('name', product.name);
         formData.append('description', product.description);
         formData.append('voltage', product.voltage);
         formData.append('productBrand', product.productBrand.id);
         formData.append('imageProduct', product.imageProduct);
+        formData.append('imageProductURL', product.imageProductURL);
         return formData
     }
 
-    validationForm(product: Product): boolean {
+    validationForm(product: Product, isEditing = false): boolean {
         const { name, description, voltage, productBrand, imageProduct } = product;
-        if (!name || !description || !voltage || !productBrand || !imageProduct) {
+        if (!name || !description || !voltage || !productBrand || (!isEditing && !imageProduct)) {
             this.view.showError("Preencha todos os campos obrigatórios");
             return false;
         }

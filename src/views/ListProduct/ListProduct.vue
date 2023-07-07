@@ -33,7 +33,7 @@
           <div class="col-12 mb-3">
             <div class="mb-3">
               <label for="inputEmail4" class="form-label">URL da imagem do produto</label>
-              <input class="form-control" type="file" id="formFile" accept=".png, .jpeg, .jpg" @change="handleFileChange">
+              <input class="form-control" type="file" id="formFile" accept=".png, .jpeg, .jpg" @change="handleFileChange" v-bind="product.imageProductURL">
             </div>
           </div>
           <div class="col-12 mt-3">
@@ -88,7 +88,8 @@ export default defineComponent({
           id: "",
           name: ""
         },
-        imageProduct: ""
+        imageProduct: "",
+        imageProductURL: ""
       } as Product,
       productsBrand: [] as ProductBrand[],
       messageError: "" as string | null,
@@ -129,8 +130,9 @@ export default defineComponent({
       this.products = products
     },
     setProductByIdView(products: Product): void {
-      console.log(products);
       this.product = products
+      console.log(products.imageProduct)
+      console.log(this.product.description);
     },
     setProductsBrandsView(brands: ProductBrand[]): void {
       this.productsBrand = brands
@@ -180,7 +182,8 @@ export default defineComponent({
           id: "",
           name: ""
         },
-        imageProduct: ""
+        imageProduct: "",
+        imageProductURL: ""
       };
     },
     redirectForProductOverview(id: string): void {
